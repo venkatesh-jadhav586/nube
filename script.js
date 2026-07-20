@@ -31,3 +31,26 @@ const revealObserver = new IntersectionObserver(
 );
 
 revealElements.forEach((el) => revealObserver.observe(el));
+
+const stickyBanner = document.querySelector('.sticky-order-banner');
+let lastScrollY = window.scrollY;
+let isBannerHidden = false;
+
+window.addEventListener('scroll', () => {
+  const currentScrollY = window.scrollY;
+  if (!stickyBanner) return;
+
+  if (currentScrollY > lastScrollY + 10 && currentScrollY > 120) {
+    if (!isBannerHidden) {
+      stickyBanner.classList.add('hidden');
+      isBannerHidden = true;
+    }
+  } else if (currentScrollY < lastScrollY - 10) {
+    if (isBannerHidden) {
+      stickyBanner.classList.remove('hidden');
+      isBannerHidden = false;
+    }
+  }
+
+  lastScrollY = currentScrollY;
+});
