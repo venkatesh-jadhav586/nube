@@ -536,16 +536,18 @@ section { padding:100px 64px; }
   transition:transform .28s,box-shadow .28s;
 }
 .store-btn:hover { transform:translateY(-6px); }
-.store-btn::before { font-size:1.5rem; }
+.store-btn::before { content:none; }
 
 .store-btn.amazon   { background:#FFD814; color:#111; border-color:#FFA41C; box-shadow:0 6px 26px rgba(255,216,20,.5); }
-.store-btn.amazon::before   { content:'📦'; }
 .store-btn.flipkart { background:#2874F0; color:#fff; box-shadow:0 6px 26px rgba(40,116,240,.45); }
-.store-btn.flipkart::before { content:'🛒'; }
-.store-btn.shopify  { background:#96BF48; color:#fff; box-shadow:0 6px 26px rgba(150,191,72,.45); }
-.store-btn.shopify::before  { content:'🏪'; }
 .store-btn.whatsapp  { background:#25D366; color:#fff; border-color:#1FAE5D; box-shadow:0 8px 28px rgba(37,211,102,.35); }
-.store-btn.whatsapp::before { content:'💬'; }
+
+.store-icon {
+  width:22px; height:22px; object-fit:contain;
+}
+.store-btn img {
+  width:22px; height:22px; display:block;
+}
 
 /* ════════════════════════════
    INSTAGRAM SECTION
@@ -610,7 +612,11 @@ section { padding:100px 64px; }
   transition:transform .22s,box-shadow .22s;
 }
 .btn-insta:hover { transform:translateY(-3px); box-shadow:0 12px 40px rgba(0,0,0,.28); }
-.btn-insta svg  { width:22px; height:22px; }
+.btn-insta img { width:22px; height:22px; object-fit:contain; }
+
+.insta-icon img { width:28px; height:28px; object-fit:contain; }
+
+.sticky-order-icon img { width:24px; height:24px; object-fit:contain; }
 
 .insta-right {
   position:relative; z-index:1;
