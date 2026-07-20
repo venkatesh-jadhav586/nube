@@ -996,6 +996,39 @@ footer {
   .btn-primary,
   .btn-secondary{ width:100%; justify-content:center; }
 }
+
+.mobile-shop-banner {
+  display:none;
+  position:fixed;
+  left:50%;
+  bottom:92px;
+  transform:translateX(-50%);
+  z-index:450;
+  width:min(92%,420px);
+  background:var(--violet);
+  color:#fff;
+  border-radius:999px;
+  box-shadow:0 18px 48px rgba(108,60,225,.24);
+  padding:14px 22px;
+  text-align:center;
+}
+
+.mobile-shop-banner a {
+  color:#fff;
+  font-weight:700;
+  font-size:1rem;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  letter-spacing:.01em;
+}
+
+@media (max-width:680px) {
+  .mobile-shop-banner { display:flex; }
+  .mobile-shop-banner { bottom:88px; }
+}
+
 nav{
 transition: all 0.4s ease;
 }

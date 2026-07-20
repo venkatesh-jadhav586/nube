@@ -32,6 +32,14 @@ const revealObserver = new IntersectionObserver(
 
 revealElements.forEach((el) => revealObserver.observe(el));
 
+const mobileHashFix = window.matchMedia('(max-width:680px)').matches && window.location.hash === '#contact';
+if (mobileHashFix) {
+  setTimeout(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    history.replaceState(null, '', window.location.pathname + window.location.search);
+  }, 120);
+}
+
 const stickyBanner = document.querySelector('.sticky-order-banner');
 let lastScrollY = window.scrollY;
 let isBannerHidden = false;
