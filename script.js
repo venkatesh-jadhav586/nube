@@ -30,7 +30,14 @@ const revealObserver = new IntersectionObserver(
   { threshold: 0.15 }
 );
 
-revealElements.forEach((el) => revealObserver.observe(el));
+revealElements.forEach((el) => {
+  const rect = el.getBoundingClientRect();
+  if (rect.top < window.innerHeight) {
+    el.classList.add('visible');
+  } else {
+    revealObserver.observe(el);
+  }
+});
 
 const mobileHashFix = window.matchMedia('(max-width:680px)').matches && window.location.hash === '#contact';
 if (mobileHashFix) {
@@ -62,3 +69,4 @@ window.addEventListener('scroll', () => {
 
   lastScrollY = currentScrollY;
 });
+
