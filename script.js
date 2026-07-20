@@ -18,26 +18,12 @@ navLinks.forEach((link) => {
   });
 });
 
-const revealElements = document.querySelectorAll('.reveal');
-const revealObserver = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  },
-  { threshold: 0.15 }
-);
-
-revealElements.forEach((el) => {
-  const rect = el.getBoundingClientRect();
-  if (rect.top < window.innerHeight) {
-    el.classList.add('visible');
-  } else {
-    revealObserver.observe(el);
-  }
-});
+/* Content sections are always visible by default now — no more
+   scroll-triggered opacity/IntersectionObserver gating, which was
+   the cause of products silently staying hidden on some mobile
+   browsers. Cards still get a lightweight CSS entrance animation
+   on load only (see style.css), which never depends on scroll
+   position or observer timing. */
 
 const mobileHashFix = window.matchMedia('(max-width:680px)').matches && window.location.hash === '#contact';
 if (mobileHashFix) {
