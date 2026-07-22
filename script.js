@@ -36,12 +36,17 @@ if (mobileHashFix) {
 /* ── FirstCry-style search + category filtering ── */
 const productCards = document.querySelectorAll('.product-card');
 
+function normalizeDash(s) {
+  return s.replace(/[\u2010-\u2015]/g, '-').trim();
+}
+
 function ageToMonths(text) {
   const n = parseInt(text, 10) || 0;
   return text.toLowerCase().includes('year') ? n * 12 : n;
 }
 
 function bucketMatches(bucket, months) {
+  bucket = normalizeDash(bucket);
   if (bucket === '0-12 months') return months <= 12;
   if (bucket === '1-3 years')   return months >= 12 && months <= 36;
   if (bucket === '4-7 years')   return months >= 36;
@@ -60,15 +65,16 @@ document.querySelectorAll('.age-btn').forEach((btn) => {
   btn.addEventListener('click', () => {
     document.querySelectorAll('.age-btn').forEach((b) => b.classList.remove('active'));
     btn.classList.add('active');
-    applyAgeFilter(btn.textContent.trim());
+    const bucket = normalizeDash(btn.textContent);
+    applyAgeFilter(bucket);
   });
 });
 
 document.querySelectorAll('.cat-pill[data-age]').forEach((pill) => {
   pill.addEventListener('click', () => {
-    const bucket = pill.dataset.age;
+    const bucket = normalizeDash(pill.dataset.age);
     document.querySelectorAll('.age-btn').forEach((b) => {
-      b.classList.toggle('active', b.textContent.trim() === bucket);
+      b.classList.toggle('active', normalizeDash(b.textContent) === bucket);
     });
     applyAgeFilter(bucket);
   });
