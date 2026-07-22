@@ -70,11 +70,7 @@ header {
 .logo-box {
   display:flex; align-items:center;
 }
-.logo-text {
-  font-family:'Fredoka',sans-serif; font-weight:700; font-size:1.7rem;
-  color:var(--ink); letter-spacing:-.02em;
-}
-.logo-accent { color:var(--violet); }
+.logo-box img { height:64px; width:auto; object-fit:contain; }
 @keyframes slideDown {
   from { transform:translateY(-100%); opacity:0; }
   to   { transform:translateY(0);     opacity:1; }
@@ -105,7 +101,7 @@ nav a.nav-cta:hover { background:var(--violet-d); }
 
 /* ── Header search bar (FirstCry-style) ── */
 .header-search {
-  position:relative; flex:1; max-width:420px; margin:0 24px;
+  position:relative; flex:1 1 200px; min-width:140px; max-width:420px; margin:0 24px;
   display:flex; align-items:center;
 }
 .header-search input {
@@ -803,6 +799,8 @@ section { padding:100px 64px; }
 footer {
   background:#0F0D24;
   padding:48px 64px 32px;
+  position:relative;
+  z-index:2;
 }
 
 .footer-inner {
@@ -992,7 +990,7 @@ section {
 ════════════════════════════ */
 @media (max-width:680px) {
   header { padding:0 20px; height:64px; }
-  .logo-text { font-size:1.4rem; }
+  .logo-box img { height:48px; }
 
   .header-search { display:none; }
   .mobile-search {
