@@ -33,25 +33,72 @@ if (mobileHashFix) {
   }, 120);
 }
 
-const stickyBanner = document.querySelector('.sticky-order-banner');
-let lastScrollY = window.scrollY;
-let isBannerHidden = false;
+/* ── FirstCry-style search + category filtering ── */
+const productCards = document.querySelectorAll('.product-card');
 
-window.addEventListener('scroll', () => {
-  const currentScrollY = window.scrollY;
-  if (!stickyBanner) return;
+function ageToMonths(text) {
+  const n = parseInt(text, 10) || 0;
+  return text.toLowerCase().includes('year') ? n * 12 : n;
+}
 
-  if (currentScrollY > lastScrollY + 10 && currentScrollY > 120) {
-    if (!isBannerHidden) {
-      stickyBanner.classList.add('hidden');
-      isBannerHidden = true;
-    }
-  } else if (currentScrollY < lastScrollY - 10) {
-    if (isBannerHidden) {
-      stickyBanner.classList.remove('hidden');
-      isBannerHidden = false;
-    }
-  }
+function bucketMatches(bucket, months) {
+  if (bucket === '0-12 months') return months <= 12;
+  if (bucket === '1-3 years')   return months >= 12 && months <= 36;
+  if (bucket === '4-7 years')   return months >= 36;
+  return true;
+}
 
-  lastScrollY = currentScrollY;
+function applyAgeFilter(bucket) {
+  productCards.forEach((card) => {
+    const ageText = card.querySelector('.prod-age')?.textContent || '';
+    const months = ageToMonths(ageText);
+    card.classList.toggle('hidden', bucket ? !bucketMatches(bucket, months) : false);
+  });
+}
+
+document.querySelectorAll('.age-btn').forEach((btn) => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.age-btn').forEach((b) => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyAgeFilter(btn.textContent.trim());
+  });
 });
+
+document.querySelectorAll('.cat-pill[data-age]').forEach((pill) => {
+  pill.addEventListener('click', () => {
+    const bucket = pill.dataset.age;
+    document.querySelectorAll('.age-btn').forEach((b) => {
+      b.classList.toggle('active', b.textContent.trim() === bucket);
+    });
+    applyAgeFilter(bucket);
+  });
+});
+
+const siteSearch = document.getElementById('siteSearch');
+const siteSearchMobile = document.getElementById('siteSearchMobile');
+
+function runSearch(value) {
+  const q = value.trim().toLowerCase();
+  productCards.forEach((card) => {
+    const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+    const desc = card.querySelector('p')?.textContent.toLowerCase() || '';
+    const matches = !q || title.includes(q) || desc.includes(q);
+    card.classList.toggle('hidden', !matches);
+  });
+  if (q) {
+    document.querySelectorAll('.age-btn').forEach((b) => b.classList.remove('active'));
+  }
+}
+
+if (siteSearch) {
+  siteSearch.addEventListener('input', () => {
+    if (siteSearchMobile) siteSearchMobile.value = siteSearch.value;
+    runSearch(siteSearch.value);
+  });
+}
+if (siteSearchMobile) {
+  siteSearchMobile.addEventListener('input', () => {
+    if (siteSearch) siteSearch.value = siteSearchMobile.value;
+    runSearch(siteSearchMobile.value);
+  });
+}
