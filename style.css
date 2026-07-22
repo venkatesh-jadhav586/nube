@@ -68,9 +68,10 @@ header {
 }
 
 .logo-box {
-  display:flex; align-items:center;
+  display:flex; align-items:center; gap:14px;
 }
 .logo-box img { height:80px; width:auto; object-fit:contain; }
+.logo-box .brand-text-logo { height:44px; }
 @keyframes slideDown {
   from { transform:translateY(-100%); opacity:0; }
   to   { transform:translateY(0);     opacity:1; }
@@ -224,6 +225,9 @@ nav a.nav-cta:hover { background:var(--violet-d); }
 .c1 { color:var(--blush); }
 .c2 { color:var(--mint); }
 .c3 { color:var(--sun); }
+.cw1 { color:#F15E70; }
+.cw2 { color:#F78431; }
+.cw3 { color:#8B6BA8; }
 
 .hero-text p {
   font-size:1.15rem; color:var(--ink-soft); line-height:1.7;
@@ -999,7 +1003,9 @@ section {
 ════════════════════════════ */
 @media (max-width:680px) {
   header { padding:0 20px; height:74px; }
-  .logo-box img { height:58px; }
+  .logo-box { gap:8px; }
+  .logo-box img { height:44px; }
+  .logo-box .brand-text-logo { height:26px; }
 
   .header-search { display:none; }
   .mobile-search {
