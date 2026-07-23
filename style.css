@@ -60,26 +60,30 @@ a   { text-decoration:none; }
 ════════════════════════════ */
 header {
   position:fixed; inset:0 0 auto 0; z-index:300;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:0 64px; height:92px;
+  display:grid; grid-template-columns:1fr auto 1fr; align-items:center;
+  padding:0 64px; height:104px;
   background:#fff;
   border-bottom:1.5px solid var(--border);
   animation:slideDown .6s cubic-bezier(.16,1,.3,1) both;
 }
 
 .logo-box {
-  display:flex; align-items:center; gap:14px;
+  display:flex; align-items:center; gap:16px;
+  grid-column:2; justify-self:center;
 }
-.logo-box img { height:80px; width:auto; object-fit:contain; }
-.logo-box .brand-text-logo { height:44px; }
+.logo-box img { height:92px; width:auto; object-fit:contain; }
+.logo-box .brand-text-logo { height:56px; }
 @keyframes slideDown {
   from { transform:translateY(-100%); opacity:0; }
   to   { transform:translateY(0);     opacity:1; }
 }
 
+.header-search { grid-column:1; justify-self:start; }
+
 .nav-toggle {
   display:none; flex-direction:column; gap:5px;
   background:none; border:none; cursor:pointer; padding:6px;
+  grid-column:3; justify-self:end;
 }
 .nav-toggle span {
   display:block; width:24px; height:2.5px;
@@ -90,7 +94,7 @@ header {
 .nav-toggle.open span:nth-child(2) { opacity:0; }
 .nav-toggle.open span:nth-child(3) { transform:translateY(-7.5px) rotate(-45deg); }
 
-nav { display:flex; gap:4px; align-items:center; transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .3s; }
+nav { grid-column:3; justify-self:end; display:flex; gap:4px; align-items:center; transition:transform .35s cubic-bezier(.16,1,.3,1),opacity .3s; }
 nav a {
   color:var(--ink); font-weight:600; font-size:1rem;
   padding:8px 18px; border-radius:50px;
@@ -121,7 +125,7 @@ nav a.nav-cta:hover { background:var(--violet-d); }
 
 /* ── Category strip (FirstCry-style age/category nav) ── */
 .category-strip {
-  position:sticky; top:92px; z-index:290;
+  position:sticky; top:104px; z-index:290;
   display:flex; gap:10px; overflow-x:auto; scrollbar-width:none;
   padding:12px 24px; background:#fff;
   border-bottom:1px solid var(--border);
@@ -141,7 +145,7 @@ nav a.nav-cta:hover { background:var(--violet-d); }
 
 /* Push content below the fixed header — this is what was hiding the
    search bar and category strip behind it before */
-.category-strip { margin-top:92px; }
+.category-strip { margin-top:104px; }
 
 /* ════════════════════════════
    HERO
@@ -222,8 +226,8 @@ nav a.nav-cta:hover { background:var(--violet-d); }
   font-size:clamp(2.8rem,5.5vw,5rem);
   font-weight:700; line-height:1.06; margin-bottom:20px;
 }
-.c1 { color:var(--blush); }
-.c2 { color:var(--mint); }
+.c1 { color:#F15E70; }
+.c2 { color:#FF8C3B; }
 .c3 { color:var(--sun); }
 .cw1 { color:#F15E70; }
 .cw2 { color:#F78431; }
