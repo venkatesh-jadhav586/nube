@@ -83,6 +83,21 @@ document.querySelectorAll('.cat-pill[data-age]').forEach((pill) => {
 const siteSearch = document.getElementById('siteSearch');
 const siteSearchMobile = document.getElementById('siteSearchMobile');
 
+const contactForm = document.querySelector('.cform');
+const newsletterForm = document.querySelector('.nl-form');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', () => {
+    contactForm.setAttribute('data-status', 'Sending…');
+  });
+}
+
+if (newsletterForm) {
+  newsletterForm.addEventListener('submit', () => {
+    newsletterForm.setAttribute('data-status', 'Joining…');
+  });
+}
+
 function runSearch(value) {
   const q = value.trim().toLowerCase();
   productCards.forEach((card) => {
